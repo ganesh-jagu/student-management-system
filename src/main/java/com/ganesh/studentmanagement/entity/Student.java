@@ -34,10 +34,10 @@ public class Student {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCource() {
+	public String getCourse() {
 		return course;
 	}
-	public void setCource(String course) {
+	public void setCourse(String course) {
 		this.course = course;
 	}
 	

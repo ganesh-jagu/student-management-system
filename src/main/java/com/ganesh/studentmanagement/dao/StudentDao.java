@@ -1,0 +1,78 @@
+package com.ganesh.studentmanagement.dao;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import com.ganesh.studentmanagement.entity.Student;
+import com.ganesh.studentmanagement.util.HibernateUtil;
+
+public class StudentDao {
+	// save student
+	public boolean saveStudent(Student student)
+	{
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session session=sf.openSession();
+		Transaction tr=session.beginTransaction();
+		
+		try {			
+		session.persist(student);		
+		tr.commit();
+		return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			session.close();
+		}
+		
+	}
+	// All students display
+	public List getAllStudents()
+	{
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session session=sf.openSession();
+		String hql="from Student";
+		Query query= session.createQuery(hql); 
+		List<Student> list=query.list();
+		
+		return list;
+	}
+	// Single student get
+	public Student getStudentById(int sid)
+	{
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session session=sf.openSession();
+		Student stu=session.get(Student.class, sid);
+		return stu;
+	}
+	// Update Student
+	public Student updateStudent(Student student)
+	{
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session session=sf.openSession();
+		Transaction tr=session.beginTransaction();
+		try {
+			Student result=session.merge(student);
+			tr.commit();
+			return result;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			tr.rollback();
+			return null;
+		}
+		finally
+		{
+			session.close();
+		}
+			
+	}
+}
