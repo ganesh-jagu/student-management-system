@@ -110,6 +110,28 @@ public class StudentDao {
 			}
 		}
 		
+	// Search students
+	public List<Student> searchStudent(String keyword)
+	{
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session session=sf.openSession();
+		try {
+		String hql="from Student s where s.sname LIKE :keyword or s.email LIKE :keyword or s.mobile LIKE :keyword or s.course LIKE :keyword";
+		Query query=session.createQuery(hql);
+		query.setParameter("keyword","%"+keyword+"%");
+		List<Student> searchStudent=query.list();
+		return searchStudent;
+		}	
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		finally {
+			session.close();
+		}
+		
+	}
 		
 	}
 	

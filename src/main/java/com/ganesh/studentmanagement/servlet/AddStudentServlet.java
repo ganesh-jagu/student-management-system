@@ -29,7 +29,7 @@ public class AddStudentServlet extends HttpServlet {
 		Student student = new Student();
 		student.setSname(sname);
 		student.setEmail(email);
-		student.setCource(course);
+		student.setCourse(course);
 		student.setMobile(mobile);
 		
 		StudentDao dao=new StudentDao();
