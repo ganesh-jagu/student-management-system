@@ -49,8 +49,18 @@ public class StudentDao {
 	{
 		SessionFactory sf=HibernateUtil.getSessionFactory();
 		Session session=sf.openSession();
+		try {
 		Student stu=session.get(Student.class, sid);
 		return stu;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		finally {
+			session.close();
+		}
 	}
 	// Update Student
 	public Student updateStudent(Student student)
@@ -75,4 +85,31 @@ public class StudentDao {
 		}
 			
 	}
-}
+	
+	// Delete Student
+	public boolean deleteStudent(Student stu)
+	{
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session session=sf.openSession();
+		Transaction tr=session.beginTransaction();
+		
+		try {
+					session.remove(stu);
+					tr.commit();
+					return true;
+				}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				tr.rollback();
+				return false;
+			}
+			finally
+			{
+				session.close();
+			}
+		}
+		
+		
+	}
+	

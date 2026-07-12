@@ -28,6 +28,7 @@
 <td>${stu.mobile}</td>
 <td>${stu.course}</td>
 <td> <a href="EditStudent?sid=${stu.sid}">Edit</a>
+<td> <a href="deleteStudent?sid=${stu.sid}" onclick="return confirm('are you sure to delete the student?')">Delete</a>
 </tr>
 </c:forEach>
 </table>
