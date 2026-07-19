@@ -11,6 +11,30 @@ import com.ganesh.studentmanagement.entity.Student;
 import com.ganesh.studentmanagement.util.HibernateUtil;
 
 public class StudentDao {
+	// check the email is exist or not
+	public Student getStudentByEmail(String email)
+	{
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		Session session=sf.openSession();
+		try {
+			String hql="from Student s where s.email= :email";
+			Query query=session.createQuery(hql);
+			query.setParameter("email", email);
+			Student result=(Student) query.getSingleResult();
+	
+		return result;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		finally
+		{
+			session.close();
+		}
+		
+	}
 	// save student
 	public boolean saveStudent(Student student)
 	{

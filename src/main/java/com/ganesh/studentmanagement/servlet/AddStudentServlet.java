@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.ganesh.studentmanagement.dao.StudentDao;
 import com.ganesh.studentmanagement.entity.Student;
+import com.ganesh.studentmanagement.service.StudentService;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -32,8 +33,10 @@ public class AddStudentServlet extends HttpServlet {
 		student.setCourse(course);
 		student.setMobile(mobile);
 		
-		StudentDao dao=new StudentDao();
-		boolean result=dao.saveStudent(student);
+		StudentService service=new StudentService();
+		boolean result=service.saveStudent(student);
+//		StudentDao dao=new StudentDao();
+//		boolean result=dao.saveStudent(student);
 		
 		if(result)
 		{
@@ -44,7 +47,10 @@ public class AddStudentServlet extends HttpServlet {
 		}
 		else
 		{
-			System.out.println("fail");
+			request.setAttribute("emailexist","Email Allredy Exist try with differnt email");
+			RequestDispatcher rd=request.getRequestDispatcher("StudentRegister.jsp");	
+			rd.forward(request, response);
+			System.out.println("email allredy exist");
 		}
 		
 	}
