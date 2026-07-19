@@ -22,11 +22,15 @@ Mobile: <input type="text" name="mobile"/>
 <c:if test="${not empty mobileerror}">
 ${mobileerror}
 </c:if><br>
-Course: <input type="text" name="course"/>
-<c:if test="${not empty courseerror}">
-${courseerror}
-</c:if><br>
-<input type="submit"/>
+Course: <select name="course">
+    <option value="">-- Select Course --</option>
+    <option value="Java">Java</option>
+    <option value="Python">Python</option>
+    <option value="React">React</option>
+    <option value="Testing">Testing</option>
+</select> 
+
+<br><input type="submit"/>
 </form>
 
 ${emailexist}
