@@ -16,6 +16,6 @@
 <property name="hibernate.hbm2ddl.auto">update</property>
 
 <mapping class="com.ganesh.studentmanagement.entity.Student"/>
-
+<mapping class="com.ganesh.studentmanagement.entity.Admin"/>
 </session-factory>
 </hibernate-configuration>
